@@ -38,18 +38,25 @@ ys_hg_prompt_info() {
 local exit_code="%(?,, C:%{$fg[red]%}%?%{$reset_color%}) "
 
 # python version info
+# local python_version_info='$(python_version_prompt_info)'
+# python_version_prompt_info() {
+#   if command -v python > /dev/null 2>&1; then
+#     PYTHON_VERSION="$(python -V 2>&1)"
+#     PYTHON_VERSION=${PYTHON_VERSION/Python /Python}
+#     PYTHON_VERSION=${PYTHON_VERSION/ */}
+#     CONDA_DEFAULT_ENV_NAME=''
+#     if [ -n "$CONDA_DEFAULT_ENV" ]; then
+#       CONDA_DEFAULT_ENV_NAME="$CONDA_DEFAULT_ENV::"
+#     fi
+#     echo -n " %{$fg[yellow]%}(${CONDA_DEFAULT_ENV_NAME}${PYTHON_VERSION})%{$reset_color%}"
+#   fi
+# }
+# python version info
 local python_version_info='$(python_version_prompt_info)'
 python_version_prompt_info() {
-  if command -v python > /dev/null 2>&1; then
-    PYTHON_VERSION="$(python -V 2>&1)"
-    PYTHON_VERSION=${PYTHON_VERSION/Python /Python}
-    PYTHON_VERSION=${PYTHON_VERSION/ */}
-    CONDA_DEFAULT_ENV_NAME=''
     if [ -n "$CONDA_DEFAULT_ENV" ]; then
-      CONDA_DEFAULT_ENV_NAME="$CONDA_DEFAULT_ENV::"
+      echo -n " %{$fg[yellow]%}(${CONDA_DEFAULT_ENV})%{$reset_color%}"
     fi
-    echo -n " %{$fg[yellow]%}(${CONDA_DEFAULT_ENV_NAME}${PYTHON_VERSION})%{$reset_color%}"
-  fi
 }
 
 # Prompt format:
